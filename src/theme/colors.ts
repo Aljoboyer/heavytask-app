@@ -13,6 +13,8 @@ export const COLORS = {
     light_sky: '#f5f7ff',
     dark_sky: '#a2b9fa',
     gray_100: '#F3F4F6',
+    ground_yellow: '#FDF6B2',
+    
 //--------Stepper Color-------------//
     stepper_active_outter: '#A2B9FA',
     stepper_active_inner: '#1B47CC',

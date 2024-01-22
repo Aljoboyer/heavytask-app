@@ -31,4 +31,10 @@ export const Commonstyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'flex-start'
     },
+    FlexColumnEnd:{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'flex-end'
+    },
   });

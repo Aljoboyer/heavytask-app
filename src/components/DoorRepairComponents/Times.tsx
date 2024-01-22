@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import UTSText from '../UTSText/UTSText'
 import BottomCoupleButton from '../BottomCoupleButton/BottomCoupleButton'
 import TimeCard from '../TimeCard/TimeCard';
+import { COLORS } from '../../theme/colors';
 
 export default function Times({continuePress, cancelPress}: any) {
   const [selectedTime, setSelectedTime] = useState('');
@@ -10,14 +11,14 @@ export default function Times({continuePress, cancelPress}: any) {
   return (
     <View style={{flex: 1}}>
         <View style={TimesStyle.TimesConainer}>
-            <UTSText title="Choose time" preset="h3" />
+            <UTSText title="Choose time" preset="h3" customStyle={{color: COLORS.darkBlue}} />
             {
               timeCardData?.map((item) => (
                 <TimeCard timeData={item} selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
               ))
             }
         </View>
-        <BottomCoupleButton  nextPress={continuePress} cancelPress={cancelPress} />
+        <BottomCoupleButton nextActive={true} nextPress={continuePress} cancelPress={cancelPress} />
     </View>
   )
 }

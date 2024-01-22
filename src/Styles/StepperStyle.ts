@@ -15,7 +15,7 @@ export const StepperCircleStyle = StyleSheet.create({
         EmptyLine:{
             height: 2,
             backgroundColor: COLORS.stepper_off_outter,
-            width: 60,
-            marginHorizontal: 7
+            width: 65,
+            marginLeft: 5
         }
   });

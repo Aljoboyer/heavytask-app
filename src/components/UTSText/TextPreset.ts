@@ -67,6 +67,10 @@ export const presets: any = {
     },
     small: {
         ...Light,
+        fontSize: 14
+    },
+    Xsmall: {
+        ...Light,
         fontSize: 12
     }
 }

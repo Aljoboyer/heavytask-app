@@ -12,7 +12,7 @@ export default function Assign({continuePress, cancelPress}: any) {
   return (
     <View style={{flex: 1}}>
         <View style={AssignStyle.AssignConainer}>
-            <UTSText title="Assign Team Member" preset="h3" />
+            <UTSText title="Assign Team Member" preset="h3" customStyle={{color: COLORS.darkBlue}} />
 
             <UTSText title="Team Member 1" preset="title" customStyle={{color: COLORS.gray_900, marginTop: 30}}/>
             <SelectDropdown
@@ -42,7 +42,7 @@ export default function Assign({continuePress, cancelPress}: any) {
               dropdownIconPosition="right"
             />
         </View>
-        <BottomCoupleButton nextPress={continuePress} cancelPress={cancelPress} />
+        <BottomCoupleButton nextActive={true} nextPress={continuePress} cancelPress={cancelPress} />
     </View>
   )
 }
