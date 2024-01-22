@@ -8,6 +8,8 @@ export const COLORS = {
     blue: '#0931ab',
     gray_500: '#6B7280',
     gray_900: '#111928',
+    gray_200: '#E5E7EB',
+    gray_600: '#4B5563',
 //--------Stepper Color-------------//
     stepper_active_outter: '#A2B9FA',
     stepper_active_inner: '#1B47CC',

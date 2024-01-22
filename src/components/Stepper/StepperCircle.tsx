@@ -7,7 +7,7 @@ import UTSText from '../UTSText/UTSText'
 
 export default function StepperCircle({active, circleTitle, lastItem}: any) {
   return (
-    <View style={Commonstyles.FlexColumnCenter}>
+    <View style={Commonstyles.FlexColumnStart}>
        <View style={[Commonstyles.FlexCenter]}>
           <View style={[StepperCircleStyle.outterCircle, Commonstyles.FlexCenter, {backgroundColor: active ? COLORS.stepper_active_outter : COLORS.stepper_off_outter}]}>
                 <View style={[StepperCircleStyle.innerCircle, {backgroundColor: active ? COLORS.stepper_active_inner : COLORS.stepper_off_inner}]}>

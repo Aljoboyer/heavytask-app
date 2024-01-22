@@ -23,6 +23,12 @@ export const Commonstyles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
+        alignItems: 'center'
+    },
+    FlexColumnStart:{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
         alignItems: 'flex-start'
     },
   });
