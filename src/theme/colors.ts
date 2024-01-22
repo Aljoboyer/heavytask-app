@@ -10,6 +10,9 @@ export const COLORS = {
     gray_900: '#111928',
     gray_200: '#E5E7EB',
     gray_600: '#4B5563',
+    light_sky: '#f5f7ff',
+    dark_sky: '#a2b9fa',
+    gray_100: '#F3F4F6',
 //--------Stepper Color-------------//
     stepper_active_outter: '#A2B9FA',
     stepper_active_inner: '#1B47CC',

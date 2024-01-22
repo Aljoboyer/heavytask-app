@@ -1,15 +1,23 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import UTSText from '../UTSText/UTSText'
 import BottomCoupleButton from '../BottomCoupleButton/BottomCoupleButton'
+import TimeCard from '../TimeCard/TimeCard';
 
 export default function Times({continuePress, cancelPress}: any) {
+  const [selectedTime, setSelectedTime] = useState('');
+  const timeCardData = [{title: 'November 10th, 2023'},{title: 'November 16th, 2023'}]
   return (
     <View style={{flex: 1}}>
         <View style={TimesStyle.TimesConainer}>
             <UTSText title="Choose time" preset="h3" />
+            {
+              timeCardData?.map((item) => (
+                <TimeCard timeData={item} selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
+              ))
+            }
         </View>
-        <BottomCoupleButton nextPress={continuePress} cancelPress={cancelPress} />
+        <BottomCoupleButton  nextPress={continuePress} cancelPress={cancelPress} />
     </View>
   )
 }
