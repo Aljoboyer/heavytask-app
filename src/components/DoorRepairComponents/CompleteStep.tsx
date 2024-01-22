@@ -3,6 +3,7 @@ import React from 'react'
 import BottomCoupleButton from '../BottomCoupleButton/BottomCoupleButton'
 import { COLORS } from '../../theme/colors'
 import UTSText from '../UTSText/UTSText'
+import ScheduleCard from '../ScheduleCard/ScheduleCard'
 
 export default function CompleteStep({continuePress, cancelPress}: any) {
   const finishHandler = () => {
@@ -15,9 +16,9 @@ export default function CompleteStep({continuePress, cancelPress}: any) {
         <View style={{padding: 20}}>
             <UTSText preset="h2" title="Appointment Invitation Sent!" customStyle={{color: COLORS.darkBlue}}/>
 
-            <UTSText numberOfLines={5} title="We are working to finalize this schedule with the homeowner now. We will confirm when this appointment has been finalized." preset="small" customStyle={{color: COLORS.darkBlue, marginTop: 20}}  />
+            <UTSText numberOfLines={5} title="We are working to finalize this schedule with the homeowner now. We will confirm when this appointment has been finalized." preset="small" customStyle={{color: COLORS.darkBlue, marginTop: 20, marginBottom: 10}}  />
 
-
+            <ScheduleCard/>
         </View>
 
         <BottomCoupleButton cancelBtnShow={false} nextActive={true} nextTitle="Finish" nextPress={finishHandler} />
