@@ -7,11 +7,37 @@ import UTSText from '../../components/UTSText/UTSText';
 import UTSInputs from '../../components/UTSInputs/UTSInputs';
 import UTSButton from '../../components/UTSButton/UTSButton';
 import CheckBox from '../../components/CheckBox/CheckBox';
+import { useDispatch } from 'react-redux';
+import { setIslogin } from '../../redux/slices/auth-slices/auth-slice';
  
 export default function Login({navigation} : any) {
   const [checked, setChecked] = useState(false);
+  const dispatch = useDispatch()
+  const [isLoading, setIsLoading] = useState(false);
+  const [phone, setPhone] = useState('');
+  const [error, setError] = useState('');
 
+  const loginHandler = () => {
+    if(phone.length == 11){
+      setError('')
+      setIsLoading(true)
+      // dispatch(setIslogin(true))
+      
+      setTimeout(() => {
+        setIsLoading(false)
+        navigation.navigate('DoorRepair')
+      }, 1000);
+    }
+    else{
+      setError('Please write your 11digit phone number')
+    }
+  }
 
+  const onCHangeHandler = (phonetext: string) => {
+    setError('')
+    setPhone(phonetext)
+  }
+  console.log('phone >>', phone)
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.CommonBg}}>
         <View style={LoginStyle.loginInputContainer}>
@@ -25,7 +51,14 @@ export default function Login({navigation} : any) {
               <View style={{marginVertical: 15}}>
                 <UTSText title="Phone Number" preset="title"/>
 
-                <UTSInputs placeholder="123-456-7890" customStyle={{marginTop:10, height: 52}}/>
+                <UTSInputs
+                 onChangeText={onCHangeHandler} 
+                 maxLength={11}
+                 keyboardType='number-pad' placeholder="123-456-7890" customStyle={{marginTop:10, height: 52}}/>
+                 {
+             
+                 error && <UTSText title={error} preset="Xsmall" customStyle={{color: 'red', marginTop: 5}} />
+                 }
               </View>
 
               <View style={[Commonstyles.FlexBewteen, {marginVertical: 15}]}>
@@ -43,7 +76,7 @@ export default function Login({navigation} : any) {
                 </View>
               </View>
 
-              <UTSButton onPress={() => navigation.navigate('DoorRepair')} title="Login" customTextStyle={{color: 'white'}} customBtnStyle={{marginTop: 50}} />
+              <UTSButton onPress={() => loginHandler()} title={isLoading ? 'Loading...' : 'Login'} customTextStyle={{color: 'white'}} customBtnStyle={{marginTop: 50}} />
           </View>
         </View>
 
@@ -67,7 +100,7 @@ const LoginStyle = StyleSheet.create({
     borderRadius: 10,
     padding: 15,
     marginHorizontal: 15,
-    marginTop: '20%',
+    marginTop: '25%',
     elevation: 6,
     shadowColor: COLORS.gray_400,
     shadowOffset: {

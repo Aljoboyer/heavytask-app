@@ -8,7 +8,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Login from './src/screens/Auth/Login';
 import { Text } from 'react-native';
 import DoorRepair from './src/screens/DoorRepair/DoorRepair';
-
+import { Provider, useSelector } from 'react-redux';
+import { persistor, store } from './src/redux/store';
+import {PersistGate} from 'redux-persist/integration/react';
+import AppNavigator from './src/services/navigationService';
 
 const Stack: any = createNativeStackNavigator();
 
@@ -22,6 +25,7 @@ const AppTheme: any = {
 }
 
 const App = () => {
+
   const [fontsLoaded] = useFonts({
     'Inter-SemiBold': require('./assets/fonts/Inter-SemiBold.ttf'),
     'Inter-Bold': require('./assets/fonts/Inter-Bold.ttf'),
@@ -35,12 +39,13 @@ const App = () => {
     )
   }
   return (
-    <NavigationContainer theme={AppTheme}> 
-    <Stack.Navigator initialRouteName='Login' >
-      <Stack.Screen options={{headerShown: false}}  name='Login' component={Login}/>
-      <Stack.Screen options={{headerShown: false}}  name='DoorRepair' component={DoorRepair}/>
-    </Stack.Navigator> 
-  </NavigationContainer>
+  
+      <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+          <AppNavigator/>
+      </PersistGate>
+    </Provider>
+    
   );
 }
 

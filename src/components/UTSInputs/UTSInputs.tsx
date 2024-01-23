@@ -1,13 +1,15 @@
 import { View, Text, TextInput, StyleSheet } from 'react-native'
 import React from 'react'
 
-export default function UTSInputs({placeholder, numberOfLines, onChangeText, customStyle} : any) {
+export default function UTSInputs({placeholder, numberOfLines, onChangeText, customStyle, keyboardType, maxLength} : any) {
   return (
    <TextInput
     placeholder={placeholder}
     numberOfLines={numberOfLines}
-    onChangeText={onChangeText}
+    onChangeText={(text) => onChangeText(text)}
     style={[InputStyle.inputs, customStyle]}
+    keyboardType={keyboardType}
+    maxLength={maxLength}
    />
   )
 }

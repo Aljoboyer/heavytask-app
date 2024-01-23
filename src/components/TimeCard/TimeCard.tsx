@@ -8,12 +8,12 @@ import TimeCircle from './TimeCircle';
 export default function TimeCard({timeData, selectedTime, setSelectedTime}: any) {
   const timePeriod = ['Morning', 'Afternoon']
   return (
-    <View style={TimeCardStyle.timecardContainer}>
+    <View>
         <UTSText title={timeData?.title} customStyle={{color: COLORS.darkBlue}} preset="title1" />
         <View style={[Commonstyles.FlexBewteen, {marginTop: 20}]}>
             {
-              timePeriod?.map((item) => (
-                <Pressable onPress={() => setSelectedTime(timeData?.title)} style={[selectedTime == timeData?.title ? TimeCardStyle.cardSelected : TimeCardStyle.cardNotSelected, Commonstyles.FlexStart, TimeCardStyle.cardCommon]}>
+              timePeriod?.map((item, index) => (
+                <Pressable key={index} onPress={() => setSelectedTime(timeData?.title)} style={[selectedTime == timeData?.title ? TimeCardStyle.cardSelected : TimeCardStyle.cardNotSelected, Commonstyles.FlexStart, TimeCardStyle.cardCommon]}>
                   <TimeCircle active={selectedTime == timeData?.title  ? true : false} />
                   <UTSText title={item} preset="title" customStyle={{color: COLORS.darkBlue}} />
                 </Pressable>
