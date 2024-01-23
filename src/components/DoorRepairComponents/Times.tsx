@@ -8,7 +8,7 @@ import { Commonstyles } from '../../Styles/CommonStyles';
 import { AntDesign } from '@expo/vector-icons';
 
 export default function Times({continuePress, cancelPress}: any) {
-  const [selectedTime, setSelectedTime] = useState('');
+  const [selectedTime, setSelectedTime] = useState({});
   const timeCardData = [{title: 'November 10th, 2023'},{title: 'November 16th, 2023'}]
   return (
     <View style={{flex: 1}}>

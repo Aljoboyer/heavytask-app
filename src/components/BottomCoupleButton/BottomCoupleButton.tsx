@@ -12,7 +12,7 @@ export default function BottomCoupleButton({nextTitle = "Continue", cancelTitle 
         <UTSButton title={nextTitle} onPress={nextPress} customTextStyle={{color: 'white'}} customBtnStyle={{backgroundColor: nextActive ? COLORS.darkBlue : COLORS.gray_200}}/>
 
         {
-          cancelBtnShow && <UTSButton title={cancelTitle} onPress={cancelPress} customTextStyle={{color: COLORS.darkBlue}} customBtnStyle={{backgroundColor: 'white', marginTop: 10}}/>
+          cancelBtnShow && <UTSButton title={cancelTitle} onPress={cancelPress} customTextStyle={{color: COLORS.darkBlue}} customBtnStyle={{backgroundColor: 'white', marginTop: 10, borderColor: COLORS.gray_200, borderWidth: 1}}/>
         }
     </View>
   )

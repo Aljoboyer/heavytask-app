@@ -13,8 +13,8 @@ export default function TimeCard({timeData, selectedTime, setSelectedTime}: any)
         <View style={[Commonstyles.FlexBewteen, {marginTop: 20}]}>
             {
               timePeriod?.map((item, index) => (
-                <Pressable key={index} onPress={() => setSelectedTime(timeData?.title)} style={[selectedTime == timeData?.title ? TimeCardStyle.cardSelected : TimeCardStyle.cardNotSelected, Commonstyles.FlexStart, TimeCardStyle.cardCommon]}>
-                  <TimeCircle active={selectedTime == timeData?.title  ? true : false} />
+                <Pressable key={index} onPress={() => setSelectedTime({title: timeData?.title, shift: item})} style={[selectedTime == timeData?.title ? TimeCardStyle.cardSelected : TimeCardStyle.cardNotSelected, Commonstyles.FlexStart, TimeCardStyle.cardCommon]}>
+                  <TimeCircle active={selectedTime?.title == timeData?.title && selectedTime?.shift == item ? true : false} />
                   <UTSText title={item} preset="title" customStyle={{color: COLORS.darkBlue}} />
                 </Pressable>
               ))

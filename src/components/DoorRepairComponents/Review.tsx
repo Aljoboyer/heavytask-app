@@ -38,7 +38,7 @@ export default function Review({continuePress, cancelPress}: any) {
             <UTSText numberOfLines={8} title="Once submitted, the homeowner will get a text with these dates and can select which one works for them. Once they respond, your appointment will be finalized. If the customer provides an alternative date you will receive a push notification to confirm the date they provided or provide new dates to select. " preset="small" customStyle={{color: COLORS.gray_500, marginTop: 20}}  />
 
         </View>
-        <BottomCoupleButton nextActive={true} nextPress={continuePress} cancelPress={cancelPress} />
+        <BottomCoupleButton nextTitle="Submit" nextActive={true} nextPress={continuePress} cancelPress={cancelPress} />
     </View>
   )
 }
