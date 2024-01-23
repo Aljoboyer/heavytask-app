@@ -12,19 +12,14 @@ const UTSCalendar = ({
   const [selected, setSelected] = useState('');
 
   const onDayItemPress = (day : any) => {
-    console.log('day', day);
     setSelected(day?.dateString);
     onDayPress(day);
-    console.log('selected value', selected);
   };
 
   return (
     <Calendar
       onDayPress={day => onDayItemPress(day)}
-      markedDates={{
-        [markedDates]: {selected: true, disableTouchEvent: true, selectedDotColor: 'blue'},
-				[selected]: {selected: true}
-      }}
+      markedDates={markedDates}
       theme={{
         todayTextColor: 'rgba(25, 117, 255, 1)',
         textDisabledColor: 'rgba(218, 219, 225, 1)',

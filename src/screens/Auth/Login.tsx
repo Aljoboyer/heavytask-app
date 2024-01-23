@@ -16,16 +16,16 @@ export default function Login({navigation} : any) {
   const [isLoading, setIsLoading] = useState(false);
   const [phone, setPhone] = useState('');
   const [error, setError] = useState('');
+  const [hideBottomView, setHideBottomView] = useState(false);
 
   const loginHandler = () => {
     if(phone.length == 11){
       setError('')
       setIsLoading(true)
-      // dispatch(setIslogin(true))
-      
+    
       setTimeout(() => {
+        dispatch(setIslogin(true))
         setIsLoading(false)
-        navigation.navigate('DoorRepair')
       }, 1000);
     }
     else{
@@ -52,6 +52,8 @@ export default function Login({navigation} : any) {
                 <UTSText title="Phone Number" preset="title"/>
 
                 <UTSInputs
+                onBlur={() => setHideBottomView(false)}
+                onFocus={() => setHideBottomView(true)}
                  onChangeText={onCHangeHandler} 
                  maxLength={11}
                  keyboardType='number-pad' placeholder="123-456-7890" customStyle={{marginTop:10, height: 52}}/>
@@ -79,10 +81,13 @@ export default function Login({navigation} : any) {
               <UTSButton onPress={() => loginHandler()} title={isLoading ? 'Loading...' : 'Login'} customTextStyle={{color: 'white'}} customBtnStyle={{marginTop: 50}} />
           </View>
         </View>
-
-        <View style={[Commonstyles.FlexCenter, LoginStyle.bottomView]}>
-              <UTSText title="© 2024 UTS, LLC. All rights reserved." preset="p" customStyle={{color: COLORS.darkGray}}/>
-        </View>
+          
+          {
+            !hideBottomView && <View style={[Commonstyles.FlexCenter, LoginStyle.bottomView]}>
+            <UTSText title="© 2024 UTS, LLC. All rights reserved." preset="p" customStyle={{color: COLORS.darkGray}}/>
+      </View>
+          }
+ 
 
     </SafeAreaView>
   )

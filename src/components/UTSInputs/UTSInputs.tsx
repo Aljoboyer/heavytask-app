@@ -1,7 +1,7 @@
 import { View, Text, TextInput, StyleSheet } from 'react-native'
 import React from 'react'
 
-export default function UTSInputs({placeholder, numberOfLines, onChangeText, customStyle, keyboardType, maxLength} : any) {
+export default function UTSInputs({placeholder, numberOfLines, onChangeText, customStyle, keyboardType, maxLength,onFocus, onBlur} : any) {
   return (
    <TextInput
     placeholder={placeholder}
@@ -10,6 +10,8 @@ export default function UTSInputs({placeholder, numberOfLines, onChangeText, cus
     style={[InputStyle.inputs, customStyle]}
     keyboardType={keyboardType}
     maxLength={maxLength}
+    onFocus={onFocus}
+    onBlur={onBlur}
    />
   )
 }

@@ -2,7 +2,7 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Login from '../screens/Auth/Login';
 import DoorRepair from '../screens/DoorRepair/DoorRepair';
-import { useSelector } from 'react-redux';
+import EntryScreen from '../screens/EntryScreen/EntryScreen';
 
 const AppTheme: any = {
     ...DefaultTheme,
@@ -15,17 +15,11 @@ const AppTheme: any = {
 const Stack: any = createNativeStackNavigator();
 
 const AppNavigator = () => {
-  const isLogin = useSelector((state: any) => state.auth.isLogin);
 
     return (
       <NavigationContainer theme={AppTheme}> 
-      <Stack.Navigator initialRouteName='Login' >
-        {/* {
-          isLogin ?  <Stack.Screen options={{headerShown: false}}  name='Login' component={Login}/>  : 
-          <Stack.Screen options={{headerShown: false}}  name='DoorRepair' component={DoorRepair}/>
-        } */}
-       <Stack.Screen options={{headerShown: false}}  name='Login' component={Login}/>
-       <Stack.Screen options={{headerShown: false}}  name='DoorRepair' component={DoorRepair}/>
+      <Stack.Navigator initialRouteName='EntryScreen' >
+       <Stack.Screen options={{headerShown: false}}  name='EntryScreen' component={EntryScreen}/>
       </Stack.Navigator> 
      </NavigationContainer>
     );

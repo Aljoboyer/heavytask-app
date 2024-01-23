@@ -8,12 +8,64 @@ import { AntDesign } from '@expo/vector-icons';
 import { Commonstyles } from '../../Styles/CommonStyles'
 import UTSCalendar from '../UTSCalendar/UTSCalendar'
 import UTSButton from '../UTSButton/UTSButton'
+import moment from 'moment'
+import { useDispatch } from 'react-redux'
+import { setIslogin } from '../../redux/slices/auth-slices/auth-slice'
 
 export default function Dates({continuePress, cancelPress}: any) {
+  const dispatch = useDispatch()
   const [showScheduleData, setShowScheduleData] = useState(true);
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedDateArr, setSelectedDateArr] = useState<any>([])
+  const [showActive, setShowActive] = useState<any>([])
+  const [selectedDates, setSelectedDates] = useState<any>({});
 
+  const handleDayPress = (day: any, today: boolean) => {
+    if(today){
+      setSelectedDates({})
+        const selectedDate = moment(day).format('YYYY MM DD');
+        setShowActive([1,2])
+      // Toggle the selected state of the date
+      const updatedDates: any = { ...selectedDates };
+      if (updatedDates[selectedDate]) {
+        delete updatedDates[selectedDate];
+      } else {
+        updatedDates[selectedDate] = { selected: true, marked: true };
+      }
+
+      // Update the state with the new selected dates
+      setSelectedDates(updatedDates);
+
+    }
+    else{
+      const selectedDate = day.dateString;
+      setShowActive([1,2])
+    // Toggle the selected state of the date
+    const updatedDates: any = { ...selectedDates };
+    if (updatedDates[selectedDate]) {
+      delete updatedDates[selectedDate];
+    } else {
+      updatedDates[selectedDate] = { selected: true, marked: true };
+    }
+
+    // Update the state with the new selected dates
+    setSelectedDates(updatedDates);
+    setShowActive((prev: any) => [...prev, updatedDates])
+    }
+  };
+
+  const nextPressHandler = () => {
+    if(showActive?.length >= 2){
+      continuePress()
+    }
+    else{
+      return
+    }
+  }
+
+  const onCancelPress = () => {
+    dispatch(setIslogin(false))
+
+  }
+  console.log(showActive?.length)
   return (
     <View style={{flex: 1}}>
           <ScrollView style={{flex: 1}}>
@@ -21,31 +73,38 @@ export default function Dates({continuePress, cancelPress}: any) {
             <UTSText title="Choose at least 2 available dates" preset="h3" customStyle={{color: COLORS.darkBlue}} />
 
             
+           <View style={DatesStyle.calendarView}>
             <UTSCalendar
-               onDayPress={(date: any) => {
-                setSelectedDate(date?.dateString);
-                setSelectedDateArr((prev: any) => [...prev, date?.dateString])
-              }}
-              markedDates={
-                selectedDateArr ? selectedDateArr : null
-              }
-            />
-            <View style={[Commonstyles.FlexBewteen, {marginTop: 20}]}>
-                <UTSButton customTextStyle={{color: 'white'}} customBtnStyle={{width: '45%', backgroundColor: COLORS.blue}} title="Today" />
-                <UTSButton customTextStyle={{color: COLORS.darkBlue}} customBtnStyle={{width: '45%', backgroundColor: 'white', borderColor: COLORS.gray_200, borderWidth: 1}} title="Clear" />
-            </View>
+                onDayPress={(date: any) => {
+                  handleDayPress(date, false)
+                }}
+                markedDates={
+                  selectedDates
+                }
+              />
+              <View style={[Commonstyles.FlexBewteen, {marginTop: 20}]}>
+                  <UTSButton onPress={() =>  handleDayPress(new Date(), true) } customTextStyle={{color: 'white'}} customBtnStyle={{width: '45%', backgroundColor: COLORS.blue}} title="Today" />
+                  <UTSButton onPress={() => {
+                    setSelectedDates({})
+                    setShowActive([])
+                  }} customTextStyle={{color: COLORS.darkBlue}} customBtnStyle={{width: '45%', backgroundColor: 'white', borderColor: COLORS.gray_200, borderWidth: 1}} title="Clear" />
+              </View>
+           </View>
             
 
             <View style={DatesStyle.scheduleContainer}>
-              <Pressable onPress={() => setShowScheduleData(!showScheduleData)} style={[Commonstyles.FlexBewteen, {marginTop: 20, marginBottom: 5}]}>
-                  <UTSText title="Scheduled Assignments on November 10th" preset="p" customStyle={{color: COLORS.darkBlue}} />
-                  {
-                    showScheduleData ? <AntDesign name="up" size={18} color={COLORS.darkBlue} /> :
-                    <AntDesign name="down" size={18} color={COLORS.darkBlue} />
-                  }
-              </Pressable>
               {
-                showScheduleData &&
+                 showActive?.length >= 2  && <Pressable onPress={() => setShowScheduleData(!showScheduleData)} style={[Commonstyles.FlexBewteen, {marginTop: 20, marginBottom: 5}]}>
+                <UTSText title="Scheduled Assignments on November 10th" preset="p" customStyle={{color: COLORS.darkBlue}} />
+                {
+                  showScheduleData ? <AntDesign name="up" size={18} color={COLORS.darkBlue} /> :
+                  <AntDesign name="down" size={18} color={COLORS.darkBlue} />
+                }
+            </Pressable>
+              }
+              
+              {
+                (showScheduleData && showActive?.length >= 2) &&
                 [1,2].map((item) => (
                   <ScheduleCard/>
                 ))
@@ -53,7 +112,7 @@ export default function Dates({continuePress, cancelPress}: any) {
             </View>
         </View>
     </ScrollView>
-    <BottomCoupleButton nextPress={continuePress} cancelPress={cancelPress} />
+    <BottomCoupleButton nextActive={showActive?.length >= 2 ? true : false}  nextPress={nextPressHandler} cancelPress={onCancelPress} />
 
     </View>
   )
@@ -66,5 +125,16 @@ const DatesStyle = StyleSheet.create({
     },
     scheduleContainer:{
       paddingBottom: 150
+    },
+    calendarView:{
+      elevation: 6,
+      shadowColor: COLORS.gray_400,
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      backgroundColor: 'whtie'
     }
   });
